@@ -60,33 +60,15 @@ build() {
       --platform=$_platform --texroot=$srcdir/tex --engine=all --modules=all \
       --context=beta  --update  --force --make || return 1
 
- # The setuptex that comes with minimals does not work in a multi-user
- # environment. So, we modify it appropriately.
+ # Set the PATH
 
  echo "TEXMFOS=${_dest}/texmf-${_platform}"   > $srcdir/tex/setuptex
  echo "export TEXMFOS"                       >> $srcdir/tex/setuptex
- echo ""                                     >> $srcdir/tex/setuptex
- echo "TEXMFCACHE=\$HOME/texmf-cache"        >> $srcdir/tex/setuptex
- echo "export TEXMFCACHE"                    >> $srcdir/tex/setuptex
  echo ""                                     >> $srcdir/tex/setuptex
  echo "unset TEXINPUTS MPINPUTS MFINPUTS"    >> $srcdir/tex/setuptex
  echo ""                                     >> $srcdir/tex/setuptex
  echo "PATH=\$TEXMFOS/bin:\$PATH"            >> $srcdir/tex/setuptex
  echo "export PATH"                          >> $srcdir/tex/setuptex
- echo ""                                     >> $srcdir/tex/setuptex
- echo "OSFONTDIR=\"$_userfontdir;$_osfontdir;\"" \
-                                            >> $srcdir/tex/setuptex
- echo "export OSFONTDIR"                    >> $srcdir/tex/setuptex
- # If texlive exists, use fonts from texlive
- if [ -d $_texlivefontdir ]
- then
-   mkdir -p $srcdir/tex/texmf-fonts
-   if [ -L $srcdir/tex/texmf-fonts/fonts ]
-   then 
-     rm $srcdir/tex/texmf-fonts/fonts
-   fi
-   ln -s $_texlivefontdir $srcdir/tex/texmf-fonts/fonts
- fi
 }
 
 
