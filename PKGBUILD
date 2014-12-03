@@ -55,7 +55,7 @@ build() {
  mkdir -p $srcdir/tex/texmf-cache || return 1
 
  msg "Starting download or update of ConTeXt distribution"
- env PATH=$srcdir/bin:/usr/bin \
+ env PATH=$srcdir/bin:/bin:/usr/bin \
  mtxrun --script $srcdir/bin/mtx-update.lua  \
       --platform=$_platform --texroot=$srcdir/tex --engine=all --modules=all \
       --context=beta  --update  --force --make || return 1
