@@ -19,6 +19,7 @@ optdepends=('fontconfig: xetex support'
 conflicts=()
 replaces=()
 backup=()
+options=(!strip) # So that we don't have install binutils
 
 install=context-minimals-docker.install
 
