@@ -20,7 +20,7 @@ conflicts=()
 replaces=()
 backup=()
 
-install=context-minimals-git.install
+install=context-minimals-docker.install
 
 PKGEXT=".pkg.tar.gz"
 
