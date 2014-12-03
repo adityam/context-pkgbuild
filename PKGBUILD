@@ -1,6 +1,6 @@
 # Maintainer: Aditya Mahajan <adityam at umich dot edu>
-pkgname=context-minimals-git
-pkgver=20130615
+pkgname=context-minimals-docker
+pkgver=latest
 pkgrel=1
 pkgdesc="A standalone ConTeXt distribution"
 url="http://www.contextgarden.net"
@@ -25,7 +25,6 @@ install=context-minimals-git.install
 PKGEXT=".pkg.tar.gz"
 
 # ConTeXt minimals uses a different naming convention for architectures
-
 declare -A _platform_map
 
 _platform_map['i686']='linux'
@@ -55,8 +54,8 @@ build() {
  mkdir -p $srcdir/tex/texmf-cache || return 1
 
  msg "Starting download or update of ConTeXt distribution"
- PATH=$scrdir/tex/texmf-$platform/bin:$PATH \
- $srcdir/bin/texlua $srcdir/bin/mtxrun --script $srcdir/bin/mtx-update.lua  \
+ env PATH=$scrdir/tex/texmf-$_platform/bin:$PATH \
+ mtxrun --script $srcdir/bin/mtx-update.lua  \
       --platform=$_platform --texroot=$srcdir/tex --engine=all --modules=all \
       --context=beta  --update  --force --make || return 1
 
